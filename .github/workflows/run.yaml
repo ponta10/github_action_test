@@ -1,7 +1,50 @@
-name: learn-github-actions
+name: CI/CD Pipeline
+
 on: [push]
+
 jobs:
-  check-bats-version:
+  build:
+    name: Automated Build
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "this is pen"
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+  test:
+    name: Automated Testing
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run unit tests
+      run: npm run test
+
+  lint:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run ESLint
+      run: npx eslint ./src
+
+    - name: Run SonarQube analysis (assuming you have it set up)
+      run: ./path-to-your-sonar-scanner/bin/sonar-scanner
