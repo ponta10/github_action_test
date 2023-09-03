@@ -4,6 +4,6 @@ import Home from './index';
 describe('Home', () => {
   it('renders without crashing', () => {
     const { getByText } = render(<Home />);
-    expect(getByText('Get started by editing')).toBeTruthy();
+    expect(getByText('Get started by aaaa')).toBeTruthy();
   });
 });
