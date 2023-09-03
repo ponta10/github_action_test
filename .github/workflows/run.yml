@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main # またはデフォルトのブランチ名
+  pull-request:
+    branches:
+      - main # またはデフォルトのブランチ名
 
 jobs:
   build_and_test:
